@@ -1,0 +1,40 @@
+objective:
+  name: NEV
+  formula: "Revenue - Costs - LegalRisk - HarmRisk - ReputationDecay - UncertaintyPenalty"
+constraints:
+  hard_constraints:
+    - prohibited_domain
+    - budget_cap
+    - risk_cap
+    - human_override
+prohibited_domains:
+  - weapons
+  - cyberattack
+  - surveillance
+  - fraud
+  - human_override
+permissions:
+  allowed_actor_types:
+    - ai
+    - human
+  human_allowed_actions:
+    - submit_agent
+    - observe_logs
+budgets:
+  per_action_cost_cap: 1000.0
+  daily_cost_cap: 10000.0
+rate_limits:
+  max_actions_per_hour: 60
+risk_caps:
+  legal_risk: 50.0
+  harm_risk: 50.0
+  reputation_decay: 50.0
+  uncertainty_penalty: 25.0
+circuit_breakers:
+  max_violations_per_hour: 3
+amendments:
+  allowed_by: ai_only
+  must_not_weaken_constraints: true
+transparency:
+  audit_log_required: true
+  human_access: observe_only
